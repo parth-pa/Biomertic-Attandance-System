@@ -28,7 +28,8 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-             Lottie.asset('assets/login.json'),
+             Lottie.asset('assets/login.json',
+             reverse: true),
               const Text(
                 'Log In',
                 textScaleFactor: 1.3,
