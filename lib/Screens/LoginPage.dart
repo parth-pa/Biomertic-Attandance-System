@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter/material.dart';
@@ -28,30 +29,50 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-             Lottie.asset('assets/login.json',
-             reverse: true),
-              const Text(
-                'Log In',
-                textScaleFactor: 1.3,
-                style: TextStyle(
-                  letterSpacing: 2,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Colors.black,
+              FadeInLeft(
+               duration: Duration(milliseconds: 1200),
+               from: 80,
+               child: Lottie.asset('assets/login.json',
+               reverse: true),
+             ),
+              SizedBox(height: 10,),
+              FadeInLeft(
+                from: 100,
+                duration: Duration(milliseconds: 1200),
+                child: const Text(
+                  'Log In',
+                  textScaleFactor: 1.3,
+                  style: TextStyle(
+                    letterSpacing: 2,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              buildEmail(),
+              FadeInLeft(
+                from: 120,
+                duration:  Duration(milliseconds: 1200),
+                child: buildEmail(),),
+
               const SizedBox(
                 height: 20,
               ),
-              buildPassword(),
+             FadeInLeft(
+                 from: 120,
+                 duration:  Duration(milliseconds: 1200),
+                 child:  buildPassword()),
               const SizedBox(
                 height: 40,
               ),
-              LoginButton(),
+              FadeInLeft(
+                  from: 140,
+                  duration:  Duration(milliseconds: 1200),
+                  child:  LoginButton()),
+
             ],
           ),
         ),

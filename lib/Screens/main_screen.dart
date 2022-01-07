@@ -17,7 +17,7 @@ class _SignInState extends State<SignIn> {
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+        desiredAccuracy: LocationAccuracy.best);
 
     List pa =
         await placemarkFromCoordinates(position.latitude, position.longitude);
@@ -65,7 +65,9 @@ class _SignInState extends State<SignIn> {
       ),
       body: Column(
         children: [
-          Text("Latitude :" + Latitude),
+          Text("Latitude :" + Latitude,style:TextStyle(
+            fontWeight: FontWeight.bold,
+          ),),
           Text("Address : "),
           Text(address),
           Text("Longitude :" + Longtitude),
