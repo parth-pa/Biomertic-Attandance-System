@@ -7,7 +7,7 @@ class Add extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("hello"),
+        title: Text("hell yaa...."),
       ),
     );
   }
