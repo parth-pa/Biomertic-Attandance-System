@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter/material.dart';
 import 'main_screen.dart';
@@ -19,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
       _isHidden = !_isHidden;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +31,13 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FadeInLeft(
-               duration: Duration(milliseconds: 1200),
-               from: 80,
-               child: Lottie.asset('assets/login.json',
-               reverse: true),
-             ),
-              SizedBox(height: 10,),
+                duration: Duration(milliseconds: 1200),
+                from: 80,
+                child: Lottie.asset('assets/login.json', reverse: true),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               FadeInLeft(
                 from: 100,
                 duration: Duration(milliseconds: 1200),
@@ -55,31 +57,28 @@ class _LoginPageState extends State<LoginPage> {
               ),
               FadeInLeft(
                 from: 120,
-                duration:  Duration(milliseconds: 1200),
-                child: buildEmail(),),
-
+                duration: Duration(milliseconds: 1200),
+                child: buildEmail(),
+              ),
               const SizedBox(
                 height: 20,
               ),
-             FadeInLeft(
-                 from: 120,
-                 duration:  Duration(milliseconds: 1200),
-                 child:  buildPassword()),
+              FadeInLeft(
+                  from: 120,
+                  duration: Duration(milliseconds: 1200),
+                  child: buildPassword()),
               const SizedBox(
                 height: 40,
               ),
               FadeInLeft(
                   from: 140,
-                  duration:  Duration(milliseconds: 1200),
-                  child:  LoginButton()),
-
+                  duration: Duration(milliseconds: 1200),
+                  child: LoginButton()),
             ],
           ),
         ),
       ),
     );
-
-
   }
 
   Widget LoginButton() {
@@ -105,8 +104,8 @@ class _LoginPageState extends State<LoginPage> {
             )
           ],
         ),
-        child:const  Center(
-          child:Text(
+        child: const Center(
+          child: Text(
             'Login',
             style: TextStyle(
               letterSpacing: 2,
@@ -156,13 +155,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
               decoration: const InputDecoration(
                   border: InputBorder.none,
-
                   contentPadding: EdgeInsets.only(top: 14),
                   prefixIcon: Icon(Icons.lock),
                   suffixIcon: InkWell(
-
                     child: const Icon(Icons.visibility),
-
                   ),
                   hintText: 'Password',
                   hintStyle:
@@ -173,8 +169,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-
 
   Widget buildEmail() {
     return GestureDetector(

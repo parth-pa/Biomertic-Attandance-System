@@ -17,14 +17,11 @@ class _SignInState extends State<SignIn> {
 
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
 
-    List pa =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
+    List pa = await placemarkFromCoordinates(pos.latitude, pos.longitude);
     setState(() {
-      Latitude = position.latitude.toString();
-      Longtitude = position.longitude.toString();
+      Latitude = pos.latitude.toString();
+      Longtitude = pos.longitude.toString();
       address = pa[0].toString();
     });
   }
@@ -51,7 +48,8 @@ class _SignInState extends State<SignIn> {
           'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    return await Geolocator.getCurrentPosition();
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
   }
 
   @override
@@ -66,10 +64,13 @@ class _SignInState extends State<SignIn> {
       ),
       body: Column(
         children: [
-          Text("Latitude :" + Latitude,style:TextStyle(
-            fontWeight: FontWeight.bold,
-          ),),
-          Text("Address : "),
+          Text(
+            "Latitude :" + Latitude,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Text("Address : "),
           Text(address),
           Text("Longitude :" + Longtitude),
         ],
