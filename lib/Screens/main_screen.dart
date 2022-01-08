@@ -13,6 +13,7 @@ class _SignInState extends State<SignIn> {
   var Latitude = "";
   var Longtitude = "";
   var address = "";
+  var speed = "";
 
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
