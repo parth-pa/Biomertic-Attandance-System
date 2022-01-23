@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "962147744918",
+    "project_id": "biometric-attandance-system",
+    "storage_bucket": "biometric-attandance-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962147744918:android:48b32d80cfc4a0aca156b7",
+        "android_client_info": {
+          "package_name": "com.example.attandance_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962147744918-vvlni6i9jqfrdpi1tb88malr6ndkth67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDMhKXJdsphXiXqdFoTKbCIMZeSVELb9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962147744918-vvlni6i9jqfrdpi1tb88malr6ndkth67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
