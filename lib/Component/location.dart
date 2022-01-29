@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class Location extends StatefulWidget {
+  const Location({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Location> createState() => _LocationState();
 }
 
-class _SignInState extends State<SignIn> {
+class _LocationState extends State<Location> {
   var Latitude = "";
   var Longtitude = "";
   var address = "";
-
 
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
