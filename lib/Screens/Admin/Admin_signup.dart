@@ -2,7 +2,6 @@ import 'package:attandance_system/Widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// ignore: camel_case_types
 class Admin_signup extends StatefulWidget {
   const Admin_signup({Key? key}) : super(key: key);
 
@@ -14,7 +13,6 @@ class Admin_signup extends StatefulWidget {
 class _Admin_signupState extends State<Admin_signup> {
   bool isvisible = false;
   final auth = FirebaseAuth.instance;
-
   final _formKey = GlobalKey<FormState>();
 
   final emailcontroller = TextEditingController();
@@ -32,7 +30,7 @@ class _Admin_signupState extends State<Admin_signup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   height: 150,
                   width: 150,
                   child: Image.asset(
@@ -47,7 +45,7 @@ class _Admin_signupState extends State<Admin_signup> {
               height: 40,
             ),
             const Text(
-              'Sign up as a Admin',
+              'Log in as a Admin',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
@@ -65,7 +63,7 @@ class _Admin_signupState extends State<Admin_signup> {
                   child: TextFormField(
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'cant be empty';
+                        return 'email can not be empty';
                       }
                     },
                     controller: emailcontroller,
@@ -81,23 +79,32 @@ class _Admin_signupState extends State<Admin_signup> {
                 Padding(
                   padding: const EdgeInsets.only(left: 80, right: 80),
                   child: TextFormField(
-                    controller: passwordcontroller,
-                    obscureText: isvisible,
-                    decoration: InputDecoration(
-                        hintText: 'Password',
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isvisible = !isvisible;
-                            });
-                          },
-                          icon: Icon(
-                            isvisible ? Icons.visibility_off : Icons.visibility,
+                      controller: passwordcontroller,
+                      obscureText: isvisible,
+                      decoration: InputDecoration(
+                          hintText: 'Password',
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isvisible = !isvisible;
+                              });
+                            },
+                            icon: Icon(
+                              isvisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
                           ),
-                        ),
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, letterSpacing: 1)),
-                  ),
+                          hintStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, letterSpacing: 1)),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Password cannot be empty";
+                        } else if (value.length < 6) {
+                          return "password length should be atleast 6";
+                        }
+                        return null;
+                      }),
                 ),
                 const SizedBox(
                   height: 40,
@@ -106,19 +113,7 @@ class _Admin_signupState extends State<Admin_signup> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     button('Sign Up', () {
-                      auth
-                          .createUserWithEmailAndPassword(
-                              email: emailcontroller.text,
-                              password: passwordcontroller.text)
-                          .whenComplete(() {
-                        final snackBar = SnackBar(
-                          content: Text('your data Susscesfully Save'),
-                        );
-
-                        // Find the ScaffoldMessenger in the widget tree
-                        // and use it to show a SnackBar.
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      });
+                      Navigator.pushNamed(context, '/admin');
                     }),
                   ],
                 )
@@ -127,24 +122,6 @@ class _Admin_signupState extends State<Admin_signup> {
             const SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Now Go To Sign In screen',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange[800],
-                      ),
-                    )),
-              ],
-            )
           ],
         ),
       ),

@@ -30,7 +30,7 @@ class Intro extends StatelessWidget {
               text: 'Admin',
               imageUrl: 'assets/admin.png',
               onPressed: () {
-                Navigator.pushNamed(context, '/adminsignin');
+                Navigator.pushNamed(context, '/adminsignup');
               }),
           CardFb1(
               text: 'Employe',

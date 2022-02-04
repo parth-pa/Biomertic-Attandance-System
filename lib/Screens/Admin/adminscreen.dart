@@ -17,17 +17,21 @@ class _Admin_ScreenState extends State<Admin_Screen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
           backgroundColor: Colors.blue[300],
-          title: const Text(
-            'DashBoard',
-            style: TextStyle(color: Colors.black),
+          title: Text(
+            'DashBoard'.toUpperCase(),
+            style: TextStyle(color: Colors.black, letterSpacing: 2),
           ),
-          centerTitle: false,
+          centerTitle: true,
+          leadingWidth: 90,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
               Navigator.popUntil(context, ModalRoute.withName('/intro'));
             },
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
           )),
       body: StreamBuilder<QuerySnapshot>(
         stream: _usersStream,
@@ -42,11 +46,27 @@ class _Admin_ScreenState extends State<Admin_Screen> {
 
           return ListView(
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
-              Map<String, dynamic> data =
-                  document.data()! as Map<String, dynamic>;
-              return ListTile(
-                title: Text(data['firstname']),
-                subtitle: Text(data['city']),
+              return Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 5,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage('assets/employe.png'),
+                      ),
+                      title: Text(
+                          document['firstname'] + " " + document['lastname']),
+                      subtitle: Text(document['email']),
+                    ),
+                  ),
+                ],
               );
             }).toList(),
           );
