@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'dart:math';
 
 class Location extends StatefulWidget {
   const Location({Key? key}) : super(key: key);
@@ -10,18 +11,35 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
-  var Latitude = "";
-  var Longtitude = "";
   var address = "";
+  int finalDistanceAns = 0;
+  final R = 6372.8; // In kilometers
 
   Future<void> _updatePosition() async {
     Position pos = await _determinePosition();
 
     List pa = await placemarkFromCoordinates(pos.latitude, pos.longitude);
     setState(() {
-      Latitude = pos.latitude.toString();
-      Longtitude = pos.longitude.toString();
+      double curLatitude = pos.latitude;
+      double curLongitude = pos.longitude;
       address = pa[0].toString();
+      double clgFixLat = 23.004263;
+      double clgFixLong = 71.644013;
+      double dLat = _toRadians(curLatitude - clgFixLat);
+      double dLon = _toRadians(curLongitude - clgFixLong);
+      clgFixLat = _toRadians(clgFixLat);
+      curLatitude = _toRadians(curLatitude);
+      double a = pow(sin(dLat / 2), 2) +
+          pow(sin(dLon / 2), 2) * cos(clgFixLat) * cos(curLatitude);
+      double c = 2 * asin(sqrt(a));
+      double finalDistanceAns = R * c;
+
+      if (finalDistanceAns <= 0.9) {
+        Text('Hello');
+      } else {
+        print("You are outside from college premise");
+        print('You Away Frome Collage $finalDistanceAns KM ');
+      }
     });
   }
 
@@ -51,6 +69,10 @@ class _LocationState extends State<Location> {
         desiredAccuracy: LocationAccuracy.best);
   }
 
+  static double _toRadians(double degree) {
+    return degree * pi / 180;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,31 +85,20 @@ class _LocationState extends State<Location> {
       ),
       body: Column(
         children: [
-          Text(
-            "Latitude :" + Latitude,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           const Text("Address : "),
           Text(address),
-          Text("Longitude :" + Longtitude),
+          Text('$finalDistanceAns'),
         ],
       ),
-      floatingActionButton: Container(
-        height: 80,
-        width: 80,
-        child: FloatingActionButton(
-          hoverColor: Colors.green,
-          backgroundColor: Colors.amber,
-          onPressed: () {
-            _updatePosition();
-          },
-          child: const Icon(
-            Icons.gps_fixed,
-            size: 30,
-            color: Colors.black,
-          ),
+      floatingActionButton: FloatingActionButton(
+        hoverColor: Colors.green,
+        backgroundColor: Colors.amber,
+        onPressed: () {
+          _updatePosition();
+        },
+        child: const Icon(
+          Icons.gps_fixed,
+          color: Colors.black,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

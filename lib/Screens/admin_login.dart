@@ -1,6 +1,5 @@
-import 'package:attandance_system/Widgets/button.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Admin_signup extends StatefulWidget {
   const Admin_signup({Key? key}) : super(key: key);
@@ -12,11 +11,35 @@ class Admin_signup extends StatefulWidget {
 // ignore: camel_case_types
 class _Admin_signupState extends State<Admin_signup> {
   bool isvisible = false;
-  final auth = FirebaseAuth.instance;
-  final _formKey = GlobalKey<FormState>();
+
+  String email = "parth.patel030402@gmail.com";
+  String password = "1234";
 
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
+
+  Future checklogin() async {
+    if (emailcontroller.text == email && passwordcontroller.text == password) {
+      Navigator.pushNamed(context, '/admin');
+      Fluttertoast.showToast(
+          msg: "Login Succesfull",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
+      Fluttertoast.showToast(
+          msg: "Enter Valid Details",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,32 +76,24 @@ class _Admin_signupState extends State<Admin_signup> {
               ),
             ),
             const SizedBox(
-              height: 60,
+              height: 40,
             ),
             Form(
-                child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80),
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'email can not be empty';
-                      }
-                    },
+                child: Container(
+              margin: const EdgeInsets.all(60),
+              child: Column(
+                children: [
+                  TextFormField(
                     controller: emailcontroller,
                     decoration: const InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(
                             fontWeight: FontWeight.bold, letterSpacing: 1)),
                   ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 80, right: 80),
-                  child: TextFormField(
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextFormField(
                       controller: passwordcontroller,
                       obscureText: isvisible,
                       decoration: InputDecoration(
@@ -105,19 +120,19 @@ class _Admin_signupState extends State<Admin_signup> {
                         }
                         return null;
                       }),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    button('Sign Up', () {
-                      Navigator.pushNamed(context, '/admin');
-                    }),
-                  ],
-                )
-              ],
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  MaterialButton(
+                    textColor: Colors.white,
+                    color: Colors.orange.withOpacity(.7),
+                    onPressed: () {
+                      checklogin();
+                    },
+                    child: const Text('Log In'),
+                  )
+                ],
+              ),
             )),
             const SizedBox(
               height: 10,
