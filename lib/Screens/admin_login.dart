@@ -13,10 +13,12 @@ class _Admin_signupState extends State<Admin_signup> {
   bool isvisible = false;
 
   String email = "parth.patel030402@gmail.com";
-  String password = "1234";
+  String password = "12345";
 
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   Future checklogin() async {
     if (emailcontroller.text == email && passwordcontroller.text == password) {
@@ -65,7 +67,7 @@ class _Admin_signupState extends State<Admin_signup> {
               ],
             ),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             const Text(
               'Log in as a Admin',
@@ -76,64 +78,79 @@ class _Admin_signupState extends State<Admin_signup> {
               ),
             ),
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
             Form(
+                key: _formKey,
                 child: Container(
-              margin: const EdgeInsets.all(60),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: emailcontroller,
-                    decoration: const InputDecoration(
-                        hintText: 'Email',
-                        hintStyle: TextStyle(
-                            fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  margin: const EdgeInsets.all(60),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: emailcontroller,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Email',
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.bold, letterSpacing: 1)),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      TextFormField(
+                          controller: passwordcontroller,
+                          obscureText: isvisible,
+                          decoration: InputDecoration(
+                              hintText: 'Password',
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isvisible = !isvisible;
+                                  });
+                                },
+                                icon: Icon(
+                                  isvisible
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                ),
+                              ),
+                              hintStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1)),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Password cannot be empty";
+                            } else if (value.length < 4) {
+                              return "password length should be atleast 4";
+                            }
+                            return null;
+                          }),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      MaterialButton(
+                        textColor: Colors.white,
+                        color: Colors.blue,
+                        onPressed: () {
+                          checklogin();
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pushNamed(context, '/admin');
+
+                            // If the form is valid, display a snackbar. In the real world,
+                            // you'd often call a server or save the information in a database.
+
+                          }
+                        },
+                        child: const Text('Log In'),
+                      )
+                    ],
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  TextFormField(
-                      controller: passwordcontroller,
-                      obscureText: isvisible,
-                      decoration: InputDecoration(
-                          hintText: 'Password',
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isvisible = !isvisible;
-                              });
-                            },
-                            icon: Icon(
-                              isvisible
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                            ),
-                          ),
-                          hintStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, letterSpacing: 1)),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Password cannot be empty";
-                        } else if (value.length < 6) {
-                          return "password length should be atleast 6";
-                        }
-                        return null;
-                      }),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  MaterialButton(
-                    textColor: Colors.white,
-                    color: Colors.orange.withOpacity(.7),
-                    onPressed: () {
-                      checklogin();
-                    },
-                    child: const Text('Log In'),
-                  )
-                ],
-              ),
-            )),
+                )),
             const SizedBox(
               height: 10,
             ),

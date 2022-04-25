@@ -1,3 +1,4 @@
+import 'package:attandance_system/Widgets/www.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -70,15 +71,32 @@ class _employe_screenState extends State<employe_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/intro');
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
+        title: const Text(
+          'Create Your Account ',
+          style: TextStyle(
+            color: Colors.black,
+            letterSpacing: 1,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 50,
-            ),
-            const SizedBox(
-              height: 40,
+              height: 20,
             ),
             buildform(),
           ],
@@ -94,50 +112,27 @@ class _employe_screenState extends State<employe_screen> {
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Textfield(
-                      controller: firstnameController,
-                      hint: 'First Name',
-                      keyboardtype: TextInputType.name,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Expanded(
-                      child: Textfield(
-                    controller: lastnameController,
-                    hint: 'Last Name',
-                    keyboardtype: TextInputType.name,
-                  )),
-                ],
+              Textfield_loginForm(
+                controller: firstnameController,
+                hint: 'First Name',
+                keyboardtype: TextInputType.name,
               ),
               const SizedBox(
-                height: 5,
+                height: 15,
               ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Text('Department',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1,
-                          fontSize: 15,
-                          color: Colors.black.withOpacity(0.7))),
-                ],
+              Textfield_loginForm(
+                controller: lastnameController,
+                hint: 'Last Name',
+                keyboardtype: TextInputType.name,
               ),
               const SizedBox(
-                height: 6,
+                height: 15,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 15),
+                padding: const EdgeInsets.only(),
                 child: Container(
                   padding: const EdgeInsets.only(left: 10, right: 10),
-                  height: 50,
+                  height: 55,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
@@ -180,62 +175,64 @@ class _employe_screenState extends State<employe_screen> {
                 ),
               ),
               const SizedBox(
-                height: 5,
+                height: 15,
               ),
-              Textfield(
+              Textfield_loginForm(
                 controller: dateinput,
                 hint: 'Date Of Birth',
                 keyboardtype: TextInputType.number,
               ),
               const SizedBox(
-                height: 5,
+                height: 15,
               ),
-              Textfield(
+              Textfield_loginForm(
                 controller: emailcontroller,
                 hint: 'Email',
                 keyboardtype: TextInputType.emailAddress,
               ),
               const SizedBox(
-                height: 5,
+                height: 15,
               ),
-              Textfield(
+              Textfield_loginForm(
                 controller: phonenumercontroller,
                 hint: 'Phone No',
                 keyboardtype: TextInputType.number,
               ),
               const SizedBox(
-                height: 5,
+                height: 15,
               ),
-              Textfield(
+              Textfield_loginForm(
                 controller: addresscontroller,
                 hint: 'Address',
                 keyboardtype: TextInputType.streetAddress,
               ),
               const SizedBox(
-                height: 20,
+                height: 35,
               ),
               GestureDetector(
                 onTap: () {
-                  logindata!.setBool('login', false);
+                  if (formGlobalKey.currentState!.validate()) {
+                    Navigator.pushNamed(context, '/bottomnavbar');
+                    logindata!.setBool('login', false);
 
-                  setdata(
-                    firstnameController.text,
-                    lastnameController.text,
-                    dropdownvalue,
-                    emailcontroller.text,
-                    dateinput.text,
-                    phonenumercontroller.text,
-                    addresscontroller.text,
-                  );
-                  savedatatoadminpanleforchckin();
-                  Navigator.pushNamed(context, '/bottomnavbar');
+                    setdata(
+                      firstnameController.text,
+                      lastnameController.text,
+                      dropdownvalue,
+                      emailcontroller.text,
+                      dateinput.text,
+                      phonenumercontroller.text,
+                      addresscontroller.text,
+                    );
+                    savedatatoadminpanleforchckin();
+                  }
                 },
                 child: Container(
                   margin: const EdgeInsets.only(left: 20, right: 20),
                   height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Colors.orange.withOpacity(.7),
+                      color: Colors.blue.shade200,
                       borderRadius: BorderRadius.circular(12)),
                   child: const Center(
                     child: Text(

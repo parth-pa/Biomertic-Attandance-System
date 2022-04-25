@@ -120,7 +120,6 @@ class _GiveAttandanceState extends State<GiveAttandance> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,13 +142,20 @@ class _GiveAttandanceState extends State<GiveAttandance> {
                     const SizedBox(
                       height: 30,
                     ),
-                    Text(
-                      'Date  :-       ' +
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text(
+                          'Date',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17,
+                          ),
+                        ),
+                        Text(
                           DateFormat('dd MMMM yyyy').format(DateTime.now()),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 17,
-                      ),
+                        )
+                      ],
                     ),
                     const SizedBox(
                       height: 10,
@@ -169,26 +175,26 @@ class _GiveAttandanceState extends State<GiveAttandance> {
                       builder: (context) {
                         final GlobalKey<SlideActionState> _key = GlobalKey();
                         return Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 30),
+                          padding: const EdgeInsets.only(left: 30.0, right: 40),
                           child: SlideAction(
                             key: _key,
                             onSubmit: () {
                               _authenticateWithBiometrics();
                               Future.delayed(
-                                const Duration(seconds: 2),
+                                const Duration(seconds: 1),
                                 () => _key.currentState?.reset(),
                               );
                             },
                             sliderButtonIconSize: 12,
                             height: 60,
                             innerColor: Colors.white,
-                            outerColor: Colors.brown,
+                            outerColor: Colors.blue.shade400,
                             sliderRotate: true,
                             borderRadius: 18,
                             elevation: 10,
                             alignment: Alignment.center,
                             child: const Text(
-                              'Swipe Right  To Check In',
+                              'Check In',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -206,26 +212,26 @@ class _GiveAttandanceState extends State<GiveAttandance> {
                       builder: (context) {
                         final GlobalKey<SlideActionState> _key = GlobalKey();
                         return Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 30),
+                          padding: const EdgeInsets.only(left: 30.0, right: 40),
                           child: SlideAction(
                             key: _key,
                             onSubmit: () {
                               _authenticateWithBiometrics1();
                               Future.delayed(
-                                const Duration(seconds: 2),
+                                const Duration(seconds: 1),
                                 () => _key.currentState?.reset(),
                               );
                             },
                             sliderButtonIconSize: 12,
                             height: 60,
                             innerColor: Colors.white,
-                            outerColor: Colors.brown,
+                            outerColor: Colors.blue.shade400,
                             sliderRotate: true,
                             borderRadius: 18,
                             elevation: 10,
                             alignment: Alignment.center,
                             child: const Text(
-                              'Swipe Right  To Check Out',
+                              'Check Out',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,

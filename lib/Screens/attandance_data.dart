@@ -28,7 +28,7 @@ class _Admin_ScreenState extends State<Admin_Screen> {
         appBar: buildappbar(context),
         body: TabBarView(
           children: [
-            onlinedata(),
+            checkin(),
             checkout(),
           ],
         ),
@@ -36,7 +36,7 @@ class _Admin_ScreenState extends State<Admin_Screen> {
     );
   }
 
-  StreamBuilder<QuerySnapshot<Object?>> onlinedata() {
+  StreamBuilder<QuerySnapshot<Object?>> checkin() {
     return StreamBuilder<QuerySnapshot>(
       stream: _usersStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -92,10 +92,10 @@ class _Admin_ScreenState extends State<Admin_Screen> {
                                   " " +
                                   document['lastname'],
                               style: const TextStyle(
+                                  letterSpacing: .2,
                                   fontWeight: FontWeight.w900,
-                                  color: Colors.blue,
                                   fontSize: 15,
-                                  letterSpacing: .2),
+                                  color: Colors.blue),
                             ),
                             subtitle: Padding(
                               padding: const EdgeInsets.only(top: 10.0),
@@ -103,8 +103,8 @@ class _Admin_ScreenState extends State<Admin_Screen> {
                                 document['departmrent'] + '  Department',
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.6,
                                     fontSize: 13,
-                                    letterSpacing: .6,
                                     color: Colors.grey),
                               ),
                             ),
@@ -120,7 +120,7 @@ class _Admin_ScreenState extends State<Admin_Screen> {
                                       fontSize: 14),
                                 ),
                                 const SizedBox(
-                                  height: 15,
+                                  height: 10,
                                 ),
                                 Text(document['check-in'],
                                     style: const TextStyle(
@@ -132,7 +132,7 @@ class _Admin_ScreenState extends State<Admin_Screen> {
                           ),
                         ),
                       )
-                    : const SizedBox()
+                    : const SizedBox(),
               ],
             );
           }).toList(),
@@ -154,97 +154,99 @@ class _Admin_ScreenState extends State<Admin_Screen> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (snapshot.hasData) {
-          return ListView(
-            children: snapshot.data!.docs.map((DocumentSnapshot document) {
-              return Column(
-                children: [
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  DateFormat('dd MMMM yyyy')
-                              .format(document['time'].toDate()) ==
-                          _date
-                      ? Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          height: 90,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 10,
-                                  offset: Offset(2, 2),
-                                ),
-                              ]),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(
-                              leading: Container(
-                                width: 50,
-                                child: AspectRatio(
-                                  aspectRatio: 1,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.green.withOpacity(.3)),
-                                    child: const Icon(Icons.person),
-                                  ),
-                                ),
-                              ),
-                              title: Text(
-                                document['firstname'] +
-                                    " " +
-                                    document['lastname'],
-                                style: const TextStyle(
-                                    letterSpacing: .2,
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 15,
-                                    color: Colors.blue),
-                              ),
-                              subtitle: Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: Text(
-                                  document['departmrent'] + '  Department',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: 0.6,
-                                      fontSize: 13,
-                                      color: Colors.grey),
-                                ),
-                              ),
-                              trailing: Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const Text(
-                                    'Check Out',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 14),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(document['check-out'],
-                                      style: const TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
-              );
-            }).toList(),
+        if (!snapshot.hasData) {
+          return Center(
+            child: Text('NO DATA FOUND'),
           );
         }
-        return Center(child: Text('No Data Found...'));
+
+        return ListView(
+          children: snapshot.data!.docs.map((DocumentSnapshot document) {
+            return Column(
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                DateFormat('dd MMMM yyyy').format(document['time'].toDate()) ==
+                        _date
+                    ? Container(
+                        margin: const EdgeInsets.only(left: 15, right: 15),
+                        height: 90,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                offset: Offset(2, 2),
+                              ),
+                            ]),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            leading: Container(
+                              width: 50,
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.green.withOpacity(.3)),
+                                  child: const Icon(Icons.person),
+                                ),
+                              ),
+                            ),
+                            title: Text(
+                              document['firstname'] +
+                                  " " +
+                                  document['lastname'],
+                              style: const TextStyle(
+                                  letterSpacing: .2,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 15,
+                                  color: Colors.blue),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Text(
+                                document['departmrent'] + '  Department',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 0.6,
+                                    fontSize: 13,
+                                    color: Colors.grey),
+                              ),
+                            ),
+                            trailing: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Text(
+                                  'Check Out',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(document['check-out'],
+                                    style: const TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              ],
+            );
+          }).toList(),
+        );
       },
     );
   }

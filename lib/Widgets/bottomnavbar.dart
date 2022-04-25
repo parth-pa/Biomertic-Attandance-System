@@ -30,16 +30,24 @@ class _bottomnavbarState extends State<bottomnavbar> {
         selectedItemColor: Colors.blue[400],
         unselectedItemColor: Colors.black54,
         showSelectedLabels: true,
-        showUnselectedLabels: false,
-        elevation: 0,
+        showUnselectedLabels: true,
+        elevation: 20,
         currentIndex: _curruntindex,
         onTap: ontap,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home,
+              size: 27,
+            ),
             label: 'Home',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+                size: 27,
+              ),
+              label: 'Profile'),
         ],
       ),
     );

@@ -1,9 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Widgets/employe_detail_textstyle.dart';
 
@@ -45,9 +40,8 @@ class _EmployedataState extends State<Employedata> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
             onPressed: () {
