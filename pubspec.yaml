@@ -46,8 +46,9 @@ dependencies:
   google_fonts: ^2.3.1
   flutter_neumorphic: ^3.2.0
   intl: ^0.17.0
+  awesome_dialog: ^2.2.0
   slide_to_act: ^2.0.1
-  slider_button: ^2.0.0
+
 
 
   
@@ -98,7 +99,9 @@ flutter:
     - assets/Instagram_logo_2016.svg.png
     - assets/photo-1546587348-d12660c30c50.jpeg 
     - assets/admin.png  
-    - assets/employe.png               
+    - assets/employe.png    
+    - assets/73069-error.json    
+    - assets/nodata.json       
                
 
 fonts:

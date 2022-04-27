@@ -68,7 +68,7 @@ class _Admin_ScreenState extends State<Admin_Screen> {
                             boxShadow: const [
                               BoxShadow(
                                 color: Colors.black26,
-                                blurRadius: 10,
+                                blurRadius: 8,
                                 offset: Offset(2, 2),
                               ),
                             ]),
@@ -82,7 +82,7 @@ class _Admin_ScreenState extends State<Admin_Screen> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.green.withOpacity(.3)),
+                                      color: Colors.blue.shade100),
                                   child: const Icon(Icons.person),
                                 ),
                               ),
@@ -178,7 +178,7 @@ class _Admin_ScreenState extends State<Admin_Screen> {
                             boxShadow: const [
                               BoxShadow(
                                 color: Colors.black26,
-                                blurRadius: 10,
+                                blurRadius: 8,
                                 offset: Offset(2, 2),
                               ),
                             ]),
@@ -192,7 +192,7 @@ class _Admin_ScreenState extends State<Admin_Screen> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.green.withOpacity(.3)),
+                                      color: Colors.blue.shade100),
                                   child: const Icon(Icons.person),
                                 ),
                               ),

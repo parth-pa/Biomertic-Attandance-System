@@ -1,4 +1,4 @@
-import 'package:attandance_system/Screens/give_attandance.dart';
+import 'package:attandance_system/Screens/give_attendance.dart';
 import 'package:attandance_system/Screens/employe_details_screen.dart';
 import 'package:flutter/material.dart';
 

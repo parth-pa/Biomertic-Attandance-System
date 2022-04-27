@@ -19,6 +19,7 @@ class Textfield_loginForm extends StatelessWidget {
           return '$hint Can\'t be empty';
         }
       },
+      controller: controller,
       decoration: InputDecoration(
           hintText: 'Enter Your $hint',
           filled: true,

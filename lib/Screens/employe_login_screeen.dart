@@ -1,9 +1,6 @@
-import 'package:attandance_system/Widgets/www.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:attandance_system/Widgets/login_textfiekd.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Widgets/employe_login_tetfield.dart';
 
 class employe_screen extends StatefulWidget {
   const employe_screen({Key? key}) : super(key: key);
@@ -43,17 +40,6 @@ class _employe_screenState extends State<employe_screen> {
     pref.setString('phone', phone);
     pref.setString('date', dob);
     pref.setString('department', item);
-  }
-
-  CollectionReference users = FirebaseFirestore.instance.collection('admin');
-
-  savedatatoadminpanleforchckin() {
-    users.add({
-      'firstname': firstnameController.text,
-      'departmrent': dropdownvalue,
-      'lastname': lastnameController.text,
-      'phone': phonenumercontroller.text,
-    }).then((value) => print('save'));
   }
 
   final formGlobalKey = GlobalKey<FormState>();
@@ -212,9 +198,6 @@ class _employe_screenState extends State<employe_screen> {
               GestureDetector(
                 onTap: () {
                   if (formGlobalKey.currentState!.validate()) {
-                    Navigator.pushNamed(context, '/bottomnavbar');
-                    logindata!.setBool('login', false);
-
                     setdata(
                       firstnameController.text,
                       lastnameController.text,
@@ -224,7 +207,8 @@ class _employe_screenState extends State<employe_screen> {
                       phonenumercontroller.text,
                       addresscontroller.text,
                     );
-                    savedatatoadminpanleforchckin();
+                    Navigator.pushNamed(context, '/bottomnavbar');
+                    logindata!.setBool('login', false);
                   }
                 },
                 child: Container(

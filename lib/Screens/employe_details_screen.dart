@@ -104,7 +104,7 @@ class _EmployedataState extends State<Employedata> {
                     fname,
                     style: const TextStyle(
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 22,
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
                     ),
@@ -117,7 +117,7 @@ class _EmployedataState extends State<Employedata> {
                     style: const TextStyle(
                       letterSpacing: 1,
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

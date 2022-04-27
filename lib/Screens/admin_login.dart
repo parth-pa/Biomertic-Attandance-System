@@ -13,7 +13,7 @@ class _Admin_signupState extends State<Admin_signup> {
   bool isvisible = false;
 
   String email = "parth.patel030402@gmail.com";
-  String password = "12345";
+  String password = "1234";
 
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
@@ -70,7 +70,7 @@ class _Admin_signupState extends State<Admin_signup> {
               height: 30,
             ),
             const Text(
-              'Log in as a Admin',
+              'Login as a Admin',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
@@ -95,6 +95,7 @@ class _Admin_signupState extends State<Admin_signup> {
                           return null;
                         },
                         decoration: const InputDecoration(
+                            enabled: true,
                             hintText: 'Email',
                             hintStyle: TextStyle(
                                 fontWeight: FontWeight.bold, letterSpacing: 1)),
@@ -134,11 +135,12 @@ class _Admin_signupState extends State<Admin_signup> {
                         height: 40,
                       ),
                       MaterialButton(
+                        elevation: 10,
                         textColor: Colors.white,
                         color: Colors.blue,
                         onPressed: () {
-                          checklogin();
                           if (_formKey.currentState!.validate()) {
+                            checklogin();
                             Navigator.pushNamed(context, '/admin');
 
                             // If the form is valid, display a snackbar. In the real world,
@@ -146,7 +148,13 @@ class _Admin_signupState extends State<Admin_signup> {
 
                           }
                         },
-                        child: const Text('Log In'),
+                        child: const Text(
+                          'Log In',
+                          style: TextStyle(
+                              letterSpacing: .8,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
                       )
                     ],
                   ),
